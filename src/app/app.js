@@ -9,7 +9,7 @@ import Auth from './routes/Auth.routes';
 const app = express();
 const port = 3000;
 
-/** Set up middlewares */
+// Set up middlewares
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -20,7 +20,7 @@ app.use('/auth', Auth);
 app.use('/projects', Projects);
 
 app.get('/', (req, res) => {
-    res.send(`The API-REST is Online`);
+  res.send(`The API-REST is Online`);
 });
 
 app.listen(port);
