@@ -26,5 +26,6 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port);
+console.log(`Started on Port: ${port}`)
 
 export default app;

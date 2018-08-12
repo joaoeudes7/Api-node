@@ -9,13 +9,14 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
-  User.find({_id: id})
-    .then((user) => res.send(user))
+  User.find({ _id: id })
+    .then(result => res.send(result))
 });
 
 router.put('/:id', async (req, res) => {
+  const id = req.params.id;
   const userUpdated = req.body;
-  User.update({ _id: userUpdated._id }, { $set: userUpdated })
+  User.update({ _id: id }, { $set: userUpdated })
     .then(result => res.send(result));
 });
 
