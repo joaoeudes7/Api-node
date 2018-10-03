@@ -5,7 +5,7 @@
   "main": "./src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src --exec babel-node src --presets env",
+    "dev": "nodemon src --inspect --exec babel-node",
     "build": "babel src -d dist --presets env",
     "start": "node dist",
     "runMongoDB": "mongod --dbpath ./mongoDB/"
@@ -19,17 +19,17 @@
     "helmet": "^3.13.0",
     "http-status": "^1.2.0",
     "jsonwebtoken": "^8.3.0",
-    "mongoose": "^5.2.7"
+    "mongoose": "^5.3.1"
   },
   "devDependencies": {
-    "@types/bcryptjs": "^2.4.1",
-    "@types/mongoose": "^5.2.5",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/mongoose": "^5.2.17",
     "babel-cli": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "chai": "^4.1.2",
+    "chai": "^4.2.0",
     "mocha": "^5.2.0",
-    "nodemon": "^1.18.3",
-    "supertest": "^3.1.0"
+    "nodemon": "^1.18.4",
+    "supertest": "^3.3.0"
   }
 }
