@@ -9,6 +9,11 @@ router.get('/', async (req, res) => {
   User.find({}).then((users) => res.send(users))
 });
 
+router.get('/:username', async (req, res) => {
+  const username = req.params.username;
+  User.find({ name: RegExp(`^${username}`) })
+});
+
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
   User.find({ _id: id })

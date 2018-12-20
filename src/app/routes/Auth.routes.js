@@ -20,8 +20,9 @@ router.post('/', async (req, res) => {
   }
 
   user.password = undefined;
+  const access_token = await generateToken(user.id)
 
-  return res.send({ user, token: generateToken(user.id) });
+  return res.send({ user, access_token });
 });
 
 export default router;

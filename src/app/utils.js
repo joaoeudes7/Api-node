@@ -1,8 +1,11 @@
 import jwt from 'jsonwebtoken';
-import authConfig from './config/auth';
+import dotenv from 'dotenv';
 
-function generateToken(id) {
-  return jwt.sign({ 'id': id }, authConfig.secret, { expiresIn: 86400 });
+dotenv.config();
+
+async function generateToken(id) {
+  const secret_key = process.env.SECRET_KEY;
+  return jwt.sign({ 'id': id }, secret_key, { expiresIn: 86400 });
 }
 
 export { generateToken }

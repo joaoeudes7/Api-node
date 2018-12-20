@@ -1,7 +1,9 @@
 import jwt from 'jsonwebtoken';
-import authConfig from '../config/auth';
+import dotenv from 'dotenv';
 
 export default (req, res, next) => {
+  dotenv.config();
+
   const authorization = req.headers.authorization;
   const regex = new RegExp(/^Bearer\s[\w|\W]{10,}$/);
 
@@ -10,8 +12,9 @@ export default (req, res, next) => {
   }
 
   const token = authorization.split(' ')[1];
+  const secret_key = process.env.SECRET_KEY;
 
-  jwt.verify(token, authConfig.secret, (err, decoded) => {
+  jwt.verify(token, secret_key, (err, decoded) => {
     if (err) {
       return res.status(401).send({ error: 'Token invalid' });
     }
