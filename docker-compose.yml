@@ -4,6 +4,5 @@ services:
     image: mongo
     ports:
       - "27017:27017"
-    container_name: database_api_node_es6
     volumes:
       - ./database:/data/db
