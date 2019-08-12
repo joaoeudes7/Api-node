@@ -6,4 +6,4 @@ export default fastifyPlugin(async (app, opts, next) => {
   });
 
   next();
-})
+});

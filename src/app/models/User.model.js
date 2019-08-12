@@ -31,12 +31,10 @@ const UserSchema = new Schema({
   }
 });
 
-
 UserSchema.pre('save', async function (next) {
   this.password = await _hash(this.password, 10); // Encrypt password
   next();
 });
 
 const User = mongoose.model('User', UserSchema);
-
 export default User;

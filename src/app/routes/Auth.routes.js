@@ -20,10 +20,10 @@ export default fastifyPlugin(async (app, opts, next) => {
     user.password = undefined;
     const token = app.jwt.sign({ id: user.id }, {
       expiresIn: 86400
-    })
+    });
 
     return res.send({ user, token });
   });
 
   next();
-})
+});

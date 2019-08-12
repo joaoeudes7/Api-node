@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 
 import fastify from 'fastify';
-import mongodb from 'fastify-mongodb';
 import helmet from 'fastify-helmet';
 import cors from 'fastify-cors';
 import jwt from 'fastify-jwt';
@@ -10,10 +9,9 @@ import Register from './routes/Register.routes';
 import Project from './routes/Project.routes';
 import Users from './routes/Users.routes';
 import Auth from './routes/Auth.routes';
-import app from '..';
 
 class App {
-  constructor() {
+  constructor () {
     // load env configs
     dotenv.config();
 
@@ -23,21 +21,16 @@ class App {
     this.initRouters();
   }
 
-  initMiddlewares() {
+  initMiddlewares () {
     this.serve.register(helmet);
     this.serve.register(cors);
 
     this.serve.register(jwt, {
       secret: process.env.SECRET_KEY
     });
-
-    this.serve.register(mongodb, {
-      forceClose: true,
-      url: process.env.URI_MONGODB
-    });
   }
 
-  initRouters() {
+  initRouters () {
     this.serve.get('/', async (req, res) => {
       res.send(`The API-REST is Online`);
     });
@@ -50,4 +43,4 @@ class App {
   }
 }
 
-export default new App().serve
+export default new App().serve;

@@ -4,7 +4,7 @@ import User from '../models/User.model';
 
 export default fastifyPlugin(async (app, opts, next) => {
   app.post('/register', async (req, res) => {
-    let { username, email } = req.body;
+    const { username, email } = req.body;
 
     try {
       if (await User.findOne({ $or: [{ username }, { email }] })) {
@@ -22,15 +22,13 @@ export default fastifyPlugin(async (app, opts, next) => {
       user.password = undefined;
       const token = app.jwt.sign({ id: user.id }, {
         expiresIn: 86400
-      })
+      });
 
       res.send({ user, token });
-
     } catch (error) {
       next(`Error: ${error}`);
     }
-  })
+  });
 
   next();
-})
-
+});
