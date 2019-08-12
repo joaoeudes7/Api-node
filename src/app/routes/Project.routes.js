@@ -1,12 +1,9 @@
-import express from 'express';
-import authMiddleware from '../middlewares/auth';
+import fastifyPlugin from 'fastify-plugin';
 
-const router = express.Router();
+export default fastifyPlugin(async (app, opts, next) => {
+  app.get('/project', async (req, res) => {
+    res.send({ user: req.userId });
+  });
 
-router.use(authMiddleware); // Validator token
-
-router.get('/', (req, res) => {
-  res.send({ user: req.userId });
-});
-
-export default router;
+  next();
+})

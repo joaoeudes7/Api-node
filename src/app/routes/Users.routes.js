@@ -1,36 +1,42 @@
-import express from 'express';
-import authMiddleware from '../middlewares/auth';
+import fastifyPlugin from 'fastify-plugin';
+
 import User from '../models/User.model';
 
-const router = express.Router();
-router.use(authMiddleware);
+export default fastifyPlugin(async (app, opts, next) => {
+  app.get('/users', async (req, res) => {
+    await req.jwtVerify()
 
-router.get('/', async (req, res) => {
-  User.find({}).then((users) => res.send(users))
-});
+    User.find({})
+      .then(users => res.send(users))
+  });
 
-router.get('/:username', async (req, res) => {
-  const username = req.params.username;
-  User.find({ name: RegExp(`^${username}`) })
-});
+  app.get('/users/:id', async (req, res) => {
+    await req.jwtVerify()
 
-router.get('/:id', async (req, res) => {
-  const id = req.params.id;
-  User.find({ _id: id })
-    .then(result => res.send(result))
-});
+    const { _id } = req.params;
 
-router.put('/:id', async (req, res) => {
-  const id = req.params.id;
-  const userUpdated = req.body;
-  User.update({ _id: id }, { $set: userUpdated })
-    .then(result => res.send(result));
-});
+    User.find({ _id })
+      .then(result => res.send(result))
+  });
 
-router.delete('/:id', async (req, res) => {
-  const id = req.params.id;
-  User.remove({ _id: id })
-    .then(result => res.send(result))
-});
+  app.put('/users/:id', async (req, res) => {
+    await req.jwtVerify()
 
-export default router;
+    const { _id } = req.params;
+    const $set = req.body;
+
+    User.update({ _id}, { $set })
+      .then(result => res.send(result));
+  });
+
+  app.delete('/users/:id', async (req, res) => {
+    await req.jwtVerify()
+
+    const { _id } = req.params;
+
+    User.remove({ _id })
+      .then(result => res.send(result))
+  });
+
+  next();
+})
