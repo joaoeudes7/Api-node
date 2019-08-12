@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 
 import fastify from 'fastify';
+import rateLimit from 'fastify-rate-limit';
 import helmet from 'fastify-helmet';
 import cors from 'fastify-cors';
 import jwt from 'fastify-jwt';
@@ -27,6 +28,11 @@ class App {
 
     this.serve.register(jwt, {
       secret: process.env.SECRET_KEY
+    });
+
+    this.serve.register(rateLimit, {
+      max: 100,
+      timeWindow: '1 minute'
     });
   }
 
