@@ -7,7 +7,8 @@ mongoose.connect(
   process.env.URI_MONGODB,
   {
     useCreateIndex: true,
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
   });
 mongoose.Promise = Promise; // Mongoose using ES6
 
