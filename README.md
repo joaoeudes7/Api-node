@@ -1,3 +1,5 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/joaoeudes7/api-node-es6/badge)](https://www.codefactor.io/repository/github/joaoeudes7/api-node-es6)
+
 # API Node.js - ES6
 #### Ecmascript 6 - Babel
 #### MongoDB
