@@ -2,7 +2,7 @@ import fastifyPlugin from 'fastify-plugin';
 
 import User from '../models/User.model';
 
-export default fastifyPlugin(async (app, opts, next) => {
+export default fastifyPlugin((app, opts, next) => {
   app.get('/users', async (req, res) => {
     await req.jwtVerify();
 

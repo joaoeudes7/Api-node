@@ -2,7 +2,7 @@ import fastifyPlugin from 'fastify-plugin';
 
 import User from '../models/User.model';
 
-export default fastifyPlugin(async (app, opts, next) => {
+export default fastifyPlugin((app, opts, next) => {
   app.post('/register', async (req, res) => {
     const { username, email } = req.body;
 
@@ -26,7 +26,7 @@ export default fastifyPlugin(async (app, opts, next) => {
 
       res.send({ user, token });
     } catch (error) {
-      next(`Error: ${error}`);
+      res.send(`Error: ${error}`);
     }
   });
 
