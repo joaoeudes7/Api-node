@@ -1,7 +1,19 @@
-import app from './app';
+import api from './app';
 
-app.listen(3000, (err, adrr) => {
-  console.log(`Running in ${adrr}`);
+api.listen(3000, (err, adrr) => {
+  console.log(`
+  ███████╗ █████╗ ███████╗████████╗██╗███████╗██╗   ██╗
+  ██╔════╝██╔══██╗██╔════╝╚══██╔══╝██║██╔════╝╚██╗ ██╔╝
+  █████╗  ███████║███████╗   ██║   ██║█████╗   ╚████╔╝
+  ██╔══╝  ██╔══██║╚════██║   ██║   ██║██╔══╝    ╚██╔╝
+  ██║     ██║  ██║███████║   ██║   ██║██║        ██║
+  ╚═╝     ╚═╝  ╚═╝╚══════╝   ╚═╝   ╚═╝╚═╝        ╚═╝
+
+  in ${new Date()}
+  source: https://github.com/joaoeudes7/API-NODE-ES6
+
+  Running in ${adrr}
+  Running in ${adrr}/docs
+  `);
 });
 
-export default app;

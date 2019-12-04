@@ -12,17 +12,19 @@ import Users from './routes/Users.routes';
 import Auth from './routes/Auth.routes';
 
 class App {
-  constructor () {
+  constructor() {
     // load env configs
     dotenv.config();
 
-    this.serve = fastify({ logger: true });
+    this.serve = fastify({ logger: false });
 
     this.initMiddlewares();
     this.initRouters();
+
+    return this.serve;
   }
 
-  initMiddlewares () {
+  initMiddlewares() {
     this.serve.register(helmet);
     this.serve.register(cors);
 
@@ -36,17 +38,18 @@ class App {
     });
   }
 
-  initRouters () {
+  initRouters() {
     this.serve.get('/', async (req, res) => {
       res.send(`The API-REST is Online`);
     });
 
     // Modules routers
-    this.serve.register(Auth);
-    this.serve.register(Register);
-    this.serve.register(Project);
-    this.serve.register(Users);
+    this.serve
+      .register(Auth)
+      .register(Register)
+      .register(Project)
+      .register(Users);
   }
 }
 
-export default new App().serve;
+export default new App();
