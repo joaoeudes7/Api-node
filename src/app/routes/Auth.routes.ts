@@ -1,5 +1,5 @@
-import fastifyPlugin from 'fastify-plugin';
-import bcrypt from 'bcryptjs';
+import * as fastifyPlugin from 'fastify-plugin';
+import * as bcrypt from 'bcryptjs';
 
 import User from '../models/User.model';
 

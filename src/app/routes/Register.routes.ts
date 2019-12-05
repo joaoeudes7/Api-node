@@ -1,4 +1,4 @@
-import fastifyPlugin from 'fastify-plugin';
+import * as fastifyPlugin from 'fastify-plugin';
 
 import User from '../models/User.model';
 

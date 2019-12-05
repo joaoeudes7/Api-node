@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import * as mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -9,7 +9,6 @@ mongoose.connect(
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true
-  });
-mongoose.Promise = Promise; // Mongoose using ES6
+  } as mongoose.ConnectionOptions);
 
 export default mongoose;

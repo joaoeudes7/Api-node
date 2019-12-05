@@ -1,7 +1,13 @@
-import mongoose from '../config/database';
+import { Schema, Document, model } from 'mongoose';
 import { hash as _hash } from 'bcryptjs';
 
-const Schema = mongoose.Schema;
+export interface IUser extends Document {
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+  createdAt: Date
+}
 
 const UserSchema = new Schema({
   name: {
@@ -31,10 +37,10 @@ const UserSchema = new Schema({
   }
 });
 
-UserSchema.pre('save', async function (next) {
+UserSchema.pre<IUser>('save', async function (next) {
   this.password = await _hash(this.password, 10); // Encrypt password
   next();
 });
 
-const User = mongoose.model('User', UserSchema);
+const User = model<IUser>("Users", UserSchema);
 export default User;
