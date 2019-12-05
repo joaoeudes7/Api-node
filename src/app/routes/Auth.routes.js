@@ -8,21 +8,26 @@ export default fastifyPlugin((app, opts, next) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username }).select('+password');
 
-    if (!user) {
-      return res.status(400).send({ error: 'User not found' });
-    }
+    try {
+      if (!user) {
+        throw 'User not found';
+      }
 
-    if (!await bcrypt.compare(password, user.password)) {
-      return res.status(400).send({ error: 'Invalid password' });
+      if (!await bcrypt.compare(password, user.password)) {
+        throw 'Invalid password';
+      }
+    } catch (error) {
+      res.badRequest(error);
     }
 
     // hidden password
     user.password = undefined;
+
     const token = app.jwt.sign({ id: user.id }, {
       expiresIn: 86400
     });
 
-    return res.send({ user, token });
+    res.send({ user, token });
   });
 
   next();

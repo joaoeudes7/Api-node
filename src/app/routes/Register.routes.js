@@ -13,7 +13,8 @@ export default fastifyPlugin((app, opts, next) => {
         if ([username, email].some(attr => attr == null)) {
           _msg = 'Username or email not exist.';
         }
-        return res.status(400).send({ error: _msg });
+
+        throw _msg;
       }
 
       const user = await User.create(req.body);
@@ -26,7 +27,7 @@ export default fastifyPlugin((app, opts, next) => {
 
       res.send({ user, token });
     } catch (error) {
-      res.send(`Error: ${error}`);
+      res.badRequest(error);
     }
   });
 

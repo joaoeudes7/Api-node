@@ -5,9 +5,9 @@ import rateLimit from 'fastify-rate-limit';
 import helmet from 'fastify-helmet';
 import cors from 'fastify-cors';
 import jwt from 'fastify-jwt';
+import sensible from 'fastify-sensible';
 
 import Register from './routes/Register.routes';
-import Project from './routes/Project.routes';
 import Users from './routes/Users.routes';
 import Auth from './routes/Auth.routes';
 
@@ -28,6 +28,8 @@ class App {
     this.serve.register(helmet);
     this.serve.register(cors);
 
+    this.serve.register(sensible);
+
     this.serve.register(jwt, {
       secret: process.env.SECRET_KEY
     });
@@ -47,7 +49,6 @@ class App {
     this.serve
       .register(Auth)
       .register(Register)
-      .register(Project)
       .register(Users);
   }
 }
