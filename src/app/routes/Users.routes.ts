@@ -1,8 +1,11 @@
-import * as fastifyPlugin from 'fastify-plugin';
+import fastifyPlugin from 'fastify-plugin';
 
 import User from '../models/User.model';
 
 export default fastifyPlugin((app, opts, next) => {
+  /**
+   * GET USERS
+   */
   app.get('/users', async (req, res) => {
     await req.jwtVerify();
 
@@ -10,6 +13,9 @@ export default fastifyPlugin((app, opts, next) => {
       .then(users => res.send(users));
   });
 
+  /**
+   * GET USER ID
+   */
   app.get('/users/:id', async (req, res) => {
     await req.jwtVerify();
 
@@ -19,6 +25,9 @@ export default fastifyPlugin((app, opts, next) => {
       .then(result => res.send(result));
   });
 
+  /**
+   * PUT USER
+   */
   app.put('/users/:id', async (req, res) => {
     await req.jwtVerify();
 
@@ -29,6 +38,9 @@ export default fastifyPlugin((app, opts, next) => {
       .then(result => res.send(result));
   });
 
+  /**
+   * DELETE USER
+   */
   app.delete('/users/:id', async (req, res) => {
     await req.jwtVerify();
 

@@ -1,11 +1,11 @@
 import * as dotenv from 'dotenv';
 
-import * as fastify from 'fastify';
-import * as rateLimit from 'fastify-rate-limit';
-import * as helmet from 'fastify-helmet';
-import * as cors from 'fastify-cors';
-import * as jwt from 'fastify-jwt';
-import * as sensible from 'fastify-sensible';
+import fastify from 'fastify';
+import rateLimit from 'fastify-rate-limit';
+import helmet from 'fastify-helmet';
+import cors from 'fastify-cors';
+import jwt from 'fastify-jwt';
+import sensible from 'fastify-sensible';
 
 import Register from './routes/Register.routes';
 import Users from './routes/Users.routes';
@@ -30,7 +30,7 @@ class App {
     this.serve.register(sensible);
 
     this.serve.register(jwt, {
-      secret: process.env.SECRET_KEY
+      secret: process.env.SECRET_KEY!!
     });
 
     this.serve.register(rateLimit, {

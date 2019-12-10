@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 mongoose.connect(
-  process.env.URI_MONGODB,
+  process.env.URI_MONGODB!!,
   {
     useCreateIndex: true,
     useNewUrlParser: true,
