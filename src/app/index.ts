@@ -5,6 +5,7 @@ import rateLimit from 'fastify-rate-limit';
 import helmet from 'fastify-helmet';
 import cors from 'fastify-cors';
 import jwt from 'fastify-jwt';
+import compress from 'fastify-compress';
 import sensible from 'fastify-sensible';
 
 import Register from './routes/Register.routes';
@@ -24,19 +25,32 @@ class App {
   }
 
   initMiddlewares() {
+    /**
+     * SECURITY
+     */
     this.serve.register(helmet);
     this.serve.register(cors);
-
-    this.serve.register(sensible);
-
-    this.serve.register(jwt, {
-      secret: process.env.SECRET_KEY!!
-    });
-
     this.serve.register(rateLimit, {
       max: 100,
       timeWindow: 60 * 1000
     });
+
+    /**
+     * ERRORS
+     */
+    this.serve.register(sensible);
+
+    /**
+     * AUTH
+     */
+    this.serve.register(jwt, {
+      secret: process.env.SECRET_KEY!!
+    });
+
+    /**
+     * OTHERS
+     */
+    this.serve.register(compress, { inflateIfDeflated: true });
   }
 
   initRouters() {
