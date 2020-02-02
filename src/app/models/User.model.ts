@@ -1,12 +1,14 @@
+// eslint-disable-next-line no-unused-vars
 import { Schema, Document, model } from 'mongoose';
 import { hash as _hash } from 'bcryptjs';
 
 export interface IUser extends Document {
-  name: string;
+  name?: string;
   username: string;
   email: string;
   password: string;
-  createdAt: Date
+  createdAt?: Date;
+  active?: boolean
 }
 
 const UserSchema = new Schema({
@@ -34,6 +36,10 @@ const UserSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now
+  },
+  active: {
+    type: Boolean,
+    default: true
   }
 });
 
@@ -42,5 +48,5 @@ UserSchema.pre<IUser>('save', async function (next) {
   next();
 });
 
-const User = model<IUser>("Users", UserSchema);
+const User = model<IUser>('Users', UserSchema);
 export default User;

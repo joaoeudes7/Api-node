@@ -1,6 +1,6 @@
 import api from './app';
 
-api.serve.listen(3000, (err: Error, adrr: string) => {
+api.start().then(adrr => {
   console.log(`
   ███████╗ █████╗ ███████╗████████╗██╗███████╗██╗   ██╗
   ██╔════╝██╔══██╗██╔════╝╚══██╔══╝██║██╔════╝╚██╗ ██╔╝

@@ -1,6 +1,6 @@
 import fastifyPlugin from 'fastify-plugin';
 
-import User from '../models/User.model';
+import UserController from '../controller/User.controller';
 
 export default fastifyPlugin((app, opts, next) => {
   /**
@@ -9,8 +9,9 @@ export default fastifyPlugin((app, opts, next) => {
   app.get('/users', async (req, res) => {
     await req.jwtVerify();
 
-    User.find({})
-      .then(users => res.send(users));
+    UserController.getAll().then(users => {
+      res.send(users);
+    });
   });
 
   /**
@@ -21,8 +22,9 @@ export default fastifyPlugin((app, opts, next) => {
 
     const { _id } = req.params;
 
-    User.find({ _id })
-      .then(result => res.send(result));
+    UserController.getOne(_id).then(result => {
+      res.send(result);
+    });
   });
 
   /**
@@ -32,10 +34,10 @@ export default fastifyPlugin((app, opts, next) => {
     await req.jwtVerify();
 
     const { _id } = req.params;
-    const $set = req.body;
 
-    User.update({ _id }, { $set })
-      .then(result => res.send(result));
+    UserController.update(_id, req.body).then(result => {
+      res.send(result);
+    });
   });
 
   /**
@@ -46,8 +48,9 @@ export default fastifyPlugin((app, opts, next) => {
 
     const { _id } = req.params;
 
-    User.remove({ _id })
-      .then(result => res.send(result));
+    UserController.disable(_id).then(result => {
+      res.send(result);
+    });
   });
 
   next();

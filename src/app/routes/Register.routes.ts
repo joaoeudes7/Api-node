@@ -23,6 +23,8 @@ export default fastifyPlugin((app, opts, next) => {
       const user = await User.create(req.body);
 
       // Hidden password
+      delete user.password;
+
       const token = app.jwt.sign({ id: user.id }, {
         expiresIn: 86400
       });
