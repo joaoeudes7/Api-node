@@ -6,10 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon",
+    "serve": "yarn dev",
     "prebuild": "rimraf dist",
     "build": "sucrase ./src -d ./dist --transforms typescript,imports",
     "start": "node dist",
-    "lint": "eslint src/***.js --fix ",
+    "lint": "eslint src/**.ts --fix ",
     "debug": "nodemon --nolazy --inspect-brk=9229"
   },
   "author": "joaoeudes7 <joaoeudes7@gmail.com",
