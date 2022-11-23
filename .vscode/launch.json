@@ -8,14 +8,16 @@
       "type": "node",
       "request": "launch",
       "name": "Debug Node",
-      "runtimeExecutable": "yarn",
-      "program": "${workspaceFolder}/src/index.js",
+      // Try `which node` case use nvm
+      "runtimeExecutable": "${NVM_BIN}",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/dist/index.js",
       "restart": true,
       "port": 9229,
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "runtimeArgs": [
-        "dev"
+      "outFiles": [
+        "${workspaceFolder}/dist/**/*.js"
       ]
     }
   ]

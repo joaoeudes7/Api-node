@@ -3,6 +3,9 @@ import fastifyPlugin from 'fastify-plugin';
 import User from '../models/User.model';
 
 export default fastifyPlugin((app, opts, next) => {
+  /**
+   * REGISTER
+   */
   app.post('/register', async (req, res) => {
     const { username, email } = req.body;
 
@@ -20,7 +23,8 @@ export default fastifyPlugin((app, opts, next) => {
       const user = await User.create(req.body);
 
       // Hidden password
-      user.password = undefined;
+      delete user.password;
+
       const token = app.jwt.sign({ id: user.id }, {
         expiresIn: 86400
       });

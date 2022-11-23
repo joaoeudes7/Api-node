@@ -1,13 +1,17 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/joaoeudes7/api-node-es6/badge)](https://www.codefactor.io/repository/github/joaoeudes7/api-node-es6)
 
-# API Node.js - ES6
-#### Ecmascript 6 - Babel
+# API | Fastify | Typescript
+#### Typescript
 #### MongoDB
+
+![Demo](demo.png)
 
 ## Features:
 * Debug available VsCode
 * Clean code
 * Hot update
+* Security
+* Rate Limit
 
 ### Note
 * Requires MongoDb running (default: mongodb://localhost:27017)
